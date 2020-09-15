@@ -32,5 +32,16 @@ products_schema = ProductSchema(many=True)
 
 db.create_all()
 
+
+@app.route('/todo', methods=['POST'])
+def add_todo():
+    todo = request.json['todo']
+    new_todo = Todo(todo=todo)
+    db.session.add(new_todo)
+    db.session.commit()
+
+    return product_schema.jsonify(new_todo)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
