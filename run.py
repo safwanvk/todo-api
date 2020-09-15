@@ -67,5 +67,13 @@ def update_todo(id):
     return product_schema.jsonify(todo)
 
 
+@app.route('/todo/<id>', methods=['DELETE'])
+def delete_todo(id):
+    todo = Todo.query.get(id)
+    db.session.delete(todo)
+    db.session.commit()
+    return product_schema.jsonify(todo)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
