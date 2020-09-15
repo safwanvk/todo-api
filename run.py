@@ -56,5 +56,16 @@ def get_todo(id):
     return product_schema.jsonify(todo)
 
 
+@app.route('/todo/<id>', methods=['PUT'])
+def update_todo(id):
+    todo = Todo.query.get(id)
+
+    get_data = request.json['todo']
+    todo.todo = get_data
+
+    db.session.commit()
+    return product_schema.jsonify(todo)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
