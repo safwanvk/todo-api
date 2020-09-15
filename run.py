@@ -50,5 +50,11 @@ def get_todos():
     return jsonify(result)
 
 
+@app.route('/todo/<id>', methods=['GET'])
+def get_todo(id):
+    todo = Todo.query.get(id)
+    return product_schema.jsonify(todo)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
