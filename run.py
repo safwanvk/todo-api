@@ -43,5 +43,12 @@ def add_todo():
     return product_schema.jsonify(new_todo)
 
 
+@app.route('/todo', methods=['GET'])
+def get_todos():
+    all_todos = Todo.query.all()
+    result = products_schema.dump(all_todos)
+    return jsonify(result)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
